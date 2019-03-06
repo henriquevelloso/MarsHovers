@@ -1,0 +1,11 @@
+.DS_Store
+Build/
+Pods/
+
+MarsRovers.xcodeproj/project.xcworkspace/
+MarsRovers.xcodeproj/xcuserdata/
+MarsRovers.xcworkspace/
+
+!Pods/Target Support Files/Pods/Pods-resources.sh
+
+

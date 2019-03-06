@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Rovers: String {
+enum Rovers: String, Codable {
     case Curiosity
     case Opportunity
     case Spirit

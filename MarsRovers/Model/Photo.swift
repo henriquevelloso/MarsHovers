@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Photo : Decodable{
+struct Photo: Codable {
     var id: Int
     var camera: Camera
     var imageSource: String

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Camera {
+struct Camera: Codable {
     var id: String
     var name: String
     var fullName: String

@@ -16,30 +16,29 @@ class NetworkManager {
     
     func fetchPhotos(roverName:String, earthDate:String, completionHandler: @escaping ([Photo]) -> Void ) {
         
-        var urlString : String
-            if let config = self.configurations {
-            urlString = config.apiUrl.apiHost + config.apiUrl.apiPath + config.apiUrl.apiParameters + config.apiUrl.apiKey
-                urlString = self.replaceKey(urlString, key: ParameterName.roverName.rawValue, value: roverName)!
-                urlString = self.replaceKey(urlString, key: ParameterName.earthDate.rawValue, value: earthDate)!
-        }
-        
-        let url = URL(string: urlString)!
-        let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            let arrayPosts = [Photo]()
-            DispatchQueue.main.async {
-                if let data = data {
-                    let decoder = JSONDecoder()
-                    do {
-                        let decodedPosts = try decoder.decode([Photo].self, from: data)
-                        completionHandler(decodedPosts)
-                    } catch {
-                        completionHandler(arrayPosts)
+        if let config = self.configurations {
+            var urlString = config.apiUrl.apiHost + config.apiUrl.apiPath + config.apiUrl.apiParameters + config.apiUrl.apiKey
+            urlString = self.replaceKey(urlString, key: ParameterName.roverName.rawValue, value: roverName)!
+            urlString = self.replaceKey(urlString, key: ParameterName.earthDate.rawValue, value: earthDate)!
+            
+            let url = URL(string: urlString)!
+            let dataTask = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                let arrayPosts = [Photo]()
+                DispatchQueue.main.async {
+                    if let data = data {
+                        let decoder = JSONDecoder()
+                        do {
+                            let decodedPosts = try decoder.decode([Photo].self, from: data)
+                            completionHandler(decodedPosts)
+                        } catch {
+                            completionHandler(arrayPosts)
+                        }
                     }
                 }
             }
+
+            dataTask.resume()
         }
-        
-        dataTask.resume()
     }
     
     private func replaceKey(_ source: String, key: String, value: String) -> String? {

@@ -52,11 +52,11 @@
                                 </connections>
                             </segmentedControl>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dVx-eQ-QS5">
-                                <rect key="frame" x="188.5" y="458.5" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="450.5" width="37" height="37"/>
                                 <color key="color" red="0.068070911250000005" green="0.22758151260000001" blue="0.49860346500000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="axN-Ya-qqq">
-                                <rect key="frame" x="8" y="140" width="398" height="674"/>
+                                <rect key="frame" x="8" y="132" width="398" height="674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tfl-RI-Ocn">
                                     <size key="itemSize" width="141" height="142"/>
@@ -116,7 +116,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLP-ug-rGA">
-                                <rect key="frame" x="8" y="132" width="398" height="0.0"/>
+                                <rect key="frame" x="8" y="814" width="398" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.068070911250000005" green="0.22758151260000001" blue="0.49860346500000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -137,20 +137,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="SLP-ug-rGA" secondAttribute="trailing" constant="8" id="3fi-EL-7YC"/>
-                            <constraint firstItem="QDM-qy-qQm" firstAttribute="top" secondItem="axN-Ya-qqq" secondAttribute="bottom" constant="8" id="DUh-fe-AFx"/>
                             <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="axN-Ya-qqq" secondAttribute="trailing" constant="8" id="FvF-8V-9Xz"/>
                             <constraint firstItem="aaw-ou-n7Q" firstAttribute="bottom" secondItem="QDM-qy-qQm" secondAttribute="bottom" id="Gzm-ZF-yPC"/>
+                            <constraint firstItem="axN-Ya-qqq" firstAttribute="top" secondItem="W4c-ev-F0q" secondAttribute="bottom" constant="8" id="MtE-mr-zSD"/>
                             <constraint firstItem="QDM-qy-qQm" firstAttribute="centerX" secondItem="8UO-Lu-G0w" secondAttribute="centerX" id="Myu-lc-BQ3"/>
                             <constraint firstItem="dVx-eQ-QS5" firstAttribute="centerY" secondItem="axN-Ya-qqq" secondAttribute="centerY" id="NOV-i7-h9r"/>
                             <constraint firstItem="W4c-ev-F0q" firstAttribute="top" secondItem="aaw-ou-n7Q" secondAttribute="top" constant="8" id="W9t-Sk-Zf5"/>
                             <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="W4c-ev-F0q" secondAttribute="trailing" constant="8" id="WG2-Pl-zfR"/>
+                            <constraint firstItem="SLP-ug-rGA" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="WPI-Om-4MQ"/>
                             <constraint firstItem="W4c-ev-F0q" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="Wiu-bX-ZSH"/>
                             <constraint firstItem="dVx-eQ-QS5" firstAttribute="centerX" secondItem="axN-Ya-qqq" secondAttribute="centerX" id="eQc-Q9-u9f"/>
-                            <constraint firstItem="SLP-ug-rGA" firstAttribute="top" secondItem="W4c-ev-F0q" secondAttribute="bottom" constant="8" id="f0f-Ym-vDW"/>
+                            <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="SLP-ug-rGA" secondAttribute="trailing" constant="8" id="fL0-IH-rU7"/>
+                            <constraint firstItem="SLP-ug-rGA" firstAttribute="top" secondItem="axN-Ya-qqq" secondAttribute="bottom" constant="8" id="hYh-hI-Xhj"/>
                             <constraint firstItem="axN-Ya-qqq" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="kCe-Jr-kuX"/>
-                            <constraint firstItem="SLP-ug-rGA" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="whc-zu-2sH"/>
-                            <constraint firstItem="axN-Ya-qqq" firstAttribute="top" secondItem="SLP-ug-rGA" secondAttribute="bottom" constant="8" id="xr3-Zy-PqS"/>
+                            <constraint firstItem="QDM-qy-qQm" firstAttribute="top" secondItem="SLP-ug-rGA" secondAttribute="bottom" constant="8" id="vut-UR-i7w"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aaw-ou-n7Q"/>
                     </view>

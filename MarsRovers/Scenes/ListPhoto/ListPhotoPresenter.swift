@@ -14,7 +14,7 @@ import UIKit
 
 protocol ListPhotoPresentationLogic
 {
-  func presentSomething(response: ListPhoto.Something.Response)
+  func presentInitialData(response: ListPhoto.Load.Response)
 }
 
 class ListPhotoPresenter: ListPhotoPresentationLogic
@@ -23,9 +23,10 @@ class ListPhotoPresenter: ListPhotoPresentationLogic
   
   // MARK: Do something
   
-  func presentSomething(response: ListPhoto.Something.Response)
+  func presentInitialData(response: ListPhoto.Load.Response)
   {
-    let viewModel = ListPhoto.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
+    let viewModel = ListPhoto.Load.ViewModel(photos: response.photos)
+    viewController?.displayInitialData(viewModel: viewModel)
+    
   }
 }

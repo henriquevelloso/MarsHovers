@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CA251EF55353A50DA9DC395 /* Pods_MarsRovers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21FF43686E631D488CD6EB3D /* Pods_MarsRovers.framework */; };
 		C503B87C2230258B00801B91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C503B87B2230258B00801B91 /* AppDelegate.swift */; };
 		C503B8812230258B00801B91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C503B87F2230258B00801B91 /* Main.storyboard */; };
 		C503B8832230258D00801B91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C503B8822230258D00801B91 /* Assets.xcassets */; };
@@ -36,6 +37,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		21FF43686E631D488CD6EB3D /* Pods_MarsRovers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarsRovers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66FC452C4E40EA741D205ADF /* Pods-MarsRovers.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarsRovers.release.xcconfig"; path = "Target Support Files/Pods-MarsRovers/Pods-MarsRovers.release.xcconfig"; sourceTree = "<group>"; };
+		BDBF9A00DCFB15C40D8F6293 /* Pods-MarsRovers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarsRovers.debug.xcconfig"; path = "Target Support Files/Pods-MarsRovers/Pods-MarsRovers.debug.xcconfig"; sourceTree = "<group>"; };
 		C503B8782230258B00801B91 /* MarsRovers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarsRovers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C503B87B2230258B00801B91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C503B8802230258B00801B91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,17 +75,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CA251EF55353A50DA9DC395 /* Pods_MarsRovers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		783B9DCDEF80B4689D521852 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BDBF9A00DCFB15C40D8F6293 /* Pods-MarsRovers.debug.xcconfig */,
+				66FC452C4E40EA741D205ADF /* Pods-MarsRovers.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A66CFA681CA9E9F7243A14FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				21FF43686E631D488CD6EB3D /* Pods_MarsRovers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C503B86F2230258B00801B91 = {
 			isa = PBXGroup;
 			children = (
 				C503B87A2230258B00801B91 /* MarsRovers */,
 				C503B8792230258B00801B91 /* Products */,
+				783B9DCDEF80B4689D521852 /* Pods */,
+				A66CFA681CA9E9F7243A14FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,9 +222,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C503B88A2230258D00801B91 /* Build configuration list for PBXNativeTarget "MarsRovers" */;
 			buildPhases = (
+				A316F55B2B61D3E8A2D2DC1A /* [CP] Check Pods Manifest.lock */,
 				C503B8742230258B00801B91 /* Sources */,
 				C503B8752230258B00801B91 /* Frameworks */,
 				C503B8762230258B00801B91 /* Resources */,
+				740877DD111B9D1751276331 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -258,6 +284,55 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		740877DD111B9D1751276331 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarsRovers/Pods-MarsRovers-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarsRovers/Pods-MarsRovers-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A316F55B2B61D3E8A2D2DC1A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MarsRovers-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C503B8742230258B00801B91 /* Sources */ = {
@@ -429,6 +504,7 @@
 		};
 		C503B88B2230258D00801B91 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBF9A00DCFB15C40D8F6293 /* Pods-MarsRovers.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -447,6 +523,7 @@
 		};
 		C503B88C2230258D00801B91 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66FC452C4E40EA741D205ADF /* Pods-MarsRovers.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -14,7 +14,7 @@ import UIKit
 
 protocol ListPhotoBusinessLogic
 {
-  func doSomething(request: ListPhoto.Something.Request)
+  func doLoadInitialData(request: ListPhoto.Load.Request)
 }
 
 protocol ListPhotoDataStore
@@ -26,16 +26,20 @@ class ListPhotoInteractor: ListPhotoBusinessLogic, ListPhotoDataStore
 {
   var presenter: ListPhotoPresentationLogic?
   var worker: ListPhotoWorker?
-  //var name: String = ""
+  var photos: [Photo] = []
   
   // MARK: Do something
   
-  func doSomething(request: ListPhoto.Something.Request)
+  func doLoadInitialData(request: ListPhoto.Load.Request)
   {
     worker = ListPhotoWorker()
-    worker?.doSomeWork()
+    worker?.fetchPhotos(roverName: request.rover, earthDate: request.earthDate, completionHandler: { photos in
+        self.photos = photos
+        let response = ListPhoto.Load.Response(photos: photos)
+        self.presenter?.presentInitialData(response: response)
+        
+    })
     
-    let response = ListPhoto.Something.Response()
-    presenter?.presentSomething(response: response)
+  
   }
 }

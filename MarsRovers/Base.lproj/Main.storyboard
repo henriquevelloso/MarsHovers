@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="09o-Ua-zfJ">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="09o-Ua-zfJ">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="09o-Ua-zfJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="alR-86-4tt">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" red="0.035294117649999998" green="0.29411764709999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -36,20 +36,27 @@
             <objects>
                 <viewController id="k92-TS-g1T" customClass="ListPhotoViewController" customModule="MarsRovers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8UO-Lu-G0w">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W4c-ev-F0q">
-                                <rect key="frame" x="8" y="72" width="359" height="29"/>
+                                <rect key="frame" x="8" y="96" width="398" height="29"/>
                                 <segments>
                                     <segment title="Curiosity"/>
                                     <segment title="Opportunity"/>
                                     <segment title="Spirit"/>
                                 </segments>
                                 <color key="tintColor" red="0.035294117649999998" green="0.29411764709999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="roverNameChanged:" destination="k92-TS-g1T" eventType="valueChanged" id="WfW-CQ-9nG"/>
+                                </connections>
                             </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dVx-eQ-QS5">
+                                <rect key="frame" x="188.5" y="458.5" width="37" height="37"/>
+                                <color key="color" red="0.068070911250000005" green="0.22758151260000001" blue="0.49860346500000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="axN-Ya-qqq">
-                                <rect key="frame" x="8" y="108" width="359" height="559"/>
+                                <rect key="frame" x="8" y="140" width="398" height="674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Tfl-RI-Ocn">
                                     <size key="itemSize" width="141" height="142"/>
@@ -65,10 +72,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="141" height="142"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HJ-vk-2ZW" userLabel="photoContainer" customClass="RoundUIView" customModule="MarsRovers___BeBlue" customModuleProvider="target">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2HJ-vk-2ZW" userLabel="photoContainer" customClass="RoundUIView" customModule="MarsRovers" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="141" height="142"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mars" translatesAutoresizingMaskIntoConstraints="NO" id="pn4-CJ-e6U" userLabel="photo">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pn4-CJ-e6U" userLabel="photo">
                                                             <rect key="frame" x="0.0" y="0.0" width="141" height="142"/>
                                                         </imageView>
                                                     </subviews>
@@ -108,64 +115,93 @@
                                     <outlet property="delegate" destination="k92-TS-g1T" id="v2z-ki-y2G"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLP-ug-rGA">
+                                <rect key="frame" x="8" y="132" width="398" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.068070911250000005" green="0.22758151260000001" blue="0.49860346500000002" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QDM-qy-qQm">
+                                <rect key="frame" x="107" y="822" width="200" height="40"/>
+                                <color key="backgroundColor" red="0.035294117649999998" green="0.29411764709999999" blue="0.52549019610000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MB7-30-CNZ"/>
+                                    <constraint firstAttribute="width" constant="200" id="lus-uc-ELl"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Load previous photos"/>
+                                <connections>
+                                    <action selector="loadMoreAction:" destination="k92-TS-g1T" eventType="touchUpInside" id="5Lu-zi-K3G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aaw-ou-n7Q" firstAttribute="bottom" secondItem="axN-Ya-qqq" secondAttribute="bottom" id="0qg-ZN-gDc"/>
+                            <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="SLP-ug-rGA" secondAttribute="trailing" constant="8" id="3fi-EL-7YC"/>
+                            <constraint firstItem="QDM-qy-qQm" firstAttribute="top" secondItem="axN-Ya-qqq" secondAttribute="bottom" constant="8" id="DUh-fe-AFx"/>
                             <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="axN-Ya-qqq" secondAttribute="trailing" constant="8" id="FvF-8V-9Xz"/>
-                            <constraint firstItem="axN-Ya-qqq" firstAttribute="top" secondItem="W4c-ev-F0q" secondAttribute="bottom" constant="8" id="R9i-tW-Xio"/>
+                            <constraint firstItem="aaw-ou-n7Q" firstAttribute="bottom" secondItem="QDM-qy-qQm" secondAttribute="bottom" id="Gzm-ZF-yPC"/>
+                            <constraint firstItem="QDM-qy-qQm" firstAttribute="centerX" secondItem="8UO-Lu-G0w" secondAttribute="centerX" id="Myu-lc-BQ3"/>
+                            <constraint firstItem="dVx-eQ-QS5" firstAttribute="centerY" secondItem="axN-Ya-qqq" secondAttribute="centerY" id="NOV-i7-h9r"/>
                             <constraint firstItem="W4c-ev-F0q" firstAttribute="top" secondItem="aaw-ou-n7Q" secondAttribute="top" constant="8" id="W9t-Sk-Zf5"/>
                             <constraint firstItem="aaw-ou-n7Q" firstAttribute="trailing" secondItem="W4c-ev-F0q" secondAttribute="trailing" constant="8" id="WG2-Pl-zfR"/>
                             <constraint firstItem="W4c-ev-F0q" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="Wiu-bX-ZSH"/>
+                            <constraint firstItem="dVx-eQ-QS5" firstAttribute="centerX" secondItem="axN-Ya-qqq" secondAttribute="centerX" id="eQc-Q9-u9f"/>
+                            <constraint firstItem="SLP-ug-rGA" firstAttribute="top" secondItem="W4c-ev-F0q" secondAttribute="bottom" constant="8" id="f0f-Ym-vDW"/>
                             <constraint firstItem="axN-Ya-qqq" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="kCe-Jr-kuX"/>
+                            <constraint firstItem="SLP-ug-rGA" firstAttribute="leading" secondItem="aaw-ou-n7Q" secondAttribute="leading" constant="8" id="whc-zu-2sH"/>
+                            <constraint firstItem="axN-Ya-qqq" firstAttribute="top" secondItem="SLP-ug-rGA" secondAttribute="bottom" constant="8" id="xr3-Zy-PqS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aaw-ou-n7Q"/>
                     </view>
                     <navigationItem key="navigationItem" title="Mars Rovers Photos" id="SSy-OV-3hP"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="dVx-eQ-QS5" id="zPE-nU-eBy"/>
                         <outlet property="collectionView" destination="axN-Ya-qqq" id="pjV-yW-SPq"/>
+                        <outlet property="earthDateLabel" destination="SLP-ug-rGA" id="RFU-55-ZUe"/>
+                        <outlet property="loadMoreButton" destination="QDM-qy-qQm" id="i08-SD-Vav"/>
                         <outlet property="roversSegmentedControl" destination="W4c-ev-F0q" id="v05-W4-9o8"/>
                         <segue destination="cKY-w1-YBc" kind="show" identifier="segueToShowPhoto" id="WqG-Vx-Ps1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ahe-sv-ei9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="277.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="276.81159420289856" y="133.25892857142856"/>
         </scene>
         <!--Show Photo View Controller-->
         <scene sceneID="y9G-S9-8hB">
             <objects>
                 <viewController storyboardIdentifier="ShowPhotosViewController" id="cKY-w1-YBc" customClass="ShowPhotoViewController" customModule="MarsRovers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="N3h-5t-NuX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="C3P-Fd-cc8">
-                                <rect key="frame" x="8" y="72" width="359" height="587"/>
+                                <rect key="frame" x="8" y="96" width="398" height="758"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[cameraName]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FdK-oz-SI9">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[cameraFullName]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxY-eH-LRz">
-                                        <rect key="frame" x="0.0" y="20.5" width="359" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20.5" width="398" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[earthTime]" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAz-iq-uFA">
-                                        <rect key="frame" x="0.0" y="41" width="359" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="41" width="398" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WA2-mo-4hi" userLabel="photoContainer" customClass="RoundUIView" customModule="MarsRovers___BeBlue" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="61.5" width="359" height="525.5"/>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WA2-mo-4hi" userLabel="photoContainer" customClass="RoundUIView" customModule="MarsRovers" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="61.5" width="398" height="696.5"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HZ0-7x-1zD">
-                                                <rect key="frame" x="0.0" y="0.0" width="359" height="525.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="696.5"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -202,7 +238,4 @@
             <point key="canvasLocation" x="1321" y="135"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="mars" width="400" height="400"/>
-    </resources>
 </document>

@@ -11,10 +11,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol ListPhotoDisplayLogic: class
 {
-    func displaySomething(viewModel: ListPhoto.Something.ViewModel)
+    func displayInitialData(viewModel: ListPhoto.Load.ViewModel)
 }
 
 class ListPhotoViewController: UIViewController
@@ -23,23 +24,30 @@ class ListPhotoViewController: UIViewController
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var roversSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var loadMoreButton: UIButton!
+    @IBOutlet weak var earthDateLabel: UILabel!
     
     //MARK: Properties
     var interactor: ListPhotoBusinessLogic?
     var router: (NSObjectProtocol & ListPhotoRoutingLogic & ListPhotoDataPassing)?
     var photos  = [Photo]()
+    var selectedRover: Rovers
     
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
+        selectedRover = Rovers.Curiosity
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         setup()
     }
     
     required init?(coder aDecoder: NSCoder)
     {
+        
+        selectedRover = Rovers.Curiosity
         super.init(coder: aDecoder)
         setup()
     }
@@ -77,19 +85,95 @@ class ListPhotoViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        doSomething()
+        loadData()
+        layoutButton()
     }
     
     // MARK: Do something
     
     //@IBOutlet weak var nameTextField: UITextField!
     
-    func doSomething()
+    func layoutButton() {
+        self.loadMoreButton.layer.cornerRadius = 8
+    }
+    
+    @objc
+    func loadData()
     {
-        let request = ListPhoto.Something.Request()
-        interactor?.doSomething(request: request)
         
         self.collectionView.reloadData()
+        self.activityIndicator.startAnimating()
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.collectionView.alpha = 0
+            self.earthDateLabel.alpha = 0
+            self.loadMoreButton.alpha = 0
+        }, completion: {(complete)  in
+            
+           let request = ListPhoto.Load.Request(rover: self.selectedRover.rawValue.lowercased(), earthDate: "")
+            self.interactor?.doLoadInitialData(request: request)
+        })
+        
+    }
+    
+    func loadMoreData() {
+        
+        self.collectionView.reloadData()
+        self.activityIndicator.startAnimating()
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.collectionView.alpha = 0
+            self.earthDateLabel.alpha = 0
+            self.loadMoreButton.alpha = 0
+        }, completion: {(complete)  in
+            
+        
+            var dateString = ""
+            if self.photos.count > 0 {
+                dateString = self.photos.first!.earthDate
+            }
+            
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let date = formatter.date(from: dateString)!
+            let dateEnding = Calendar.current.date(byAdding: .day, value: -1, to: date as Date)!
+            let dateStr = formatter.string(from: dateEnding)
+            print(dateStr)
+            
+            let request = ListPhoto.Load.Request(rover: self.selectedRover.rawValue.lowercased(), earthDate: dateStr)
+            self.interactor?.doLoadInitialData(request: request)
+            
+            
+        })
+        
+    }
+    
+    
+    //MARK: IBAction
+    
+    @IBAction func roverNameChanged(_ sender: UISegmentedControl) {
+        
+        let index = sender.selectedSegmentIndex
+        
+        switch index {
+        case 0:
+            selectedRover =  Rovers.Curiosity
+        case 1:
+            selectedRover = Rovers.Opportunity
+        case 2:
+            selectedRover = Rovers.Spirit
+        default:
+            selectedRover = Rovers.Curiosity
+        }
+        
+        loadData()
+        
+    }
+    
+    @IBAction func loadMoreAction(_ sender: Any) {
+        
+        loadMoreData()
     }
     
 }
@@ -98,14 +182,35 @@ class ListPhotoViewController: UIViewController
 //MARK: - ListPhotoDisplayLogic 
 extension ListPhotoViewController: ListPhotoDisplayLogic {
     
-    func displaySomething(viewModel: ListPhoto.Something.ViewModel)
+    func displayInitialData(viewModel: ListPhoto.Load.ViewModel)
     {
-        //nameTextField.text = viewModel.name
+        self.photos = viewModel.photos
+        
+        DispatchQueue.main.async {
+            
+            if self.photos.count > 0 {
+                self.earthDateLabel.text = "Photos taken on \(self.photos.first!.earthDate)"
+            }
+            
+            self.collectionView.reloadData()
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                self.activityIndicator.stopAnimating()
+                self.collectionView.alpha = 1
+                self.earthDateLabel.alpha = 1
+                self.loadMoreButton.alpha = 1
+            }, completion: {(complete)  in
+                
+            })
+            
+        }
     }
 }
 
 //MARK: - UICollectionViewDataSource
 extension ListPhotoViewController: UICollectionViewDataSource {
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.photos.count
@@ -113,8 +218,30 @@ extension ListPhotoViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCollectionCell", for: indexPath) as! PhotoCollectionViewCell
+        let photo = self.photos[indexPath.row]
+        
+        let url = URL(string: photo.imageSource)
+        cell.photo.kf.indicatorType = .activity
+        cell.photo.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "mars"),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                print("Task done for: \(value.source.url?.absoluteString ?? "")")
+            case .failure(let error):
+                print("Job failed: \(error.localizedDescription)")
+            }
+        }
+        
+        
         
         return cell
     }
@@ -130,6 +257,8 @@ extension ListPhotoViewController: UICollectionViewDelegate {
         let side = (UIScreen.main.bounds.width - 26) / 2
         return CGSize(width: side, height: side)
     }
+    
+    
     
 }
 

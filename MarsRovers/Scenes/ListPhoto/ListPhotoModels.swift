@@ -16,16 +16,20 @@ enum ListPhoto
 {
   // MARK: Use cases
   
-  enum Something
+  enum Load
   {
     struct Request
     {
+        var rover: String
+        var earthDate: String
     }
     struct Response
     {
+        var photos: [Photo]
     }
     struct ViewModel
     {
+        var photos: [Photo]
     }
   }
 }

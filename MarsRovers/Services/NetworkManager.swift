@@ -75,16 +75,16 @@ class NetworkManager {
         for photo in photosData {
             guard let id = photo["id"] as? Int,
                 let earthDate = photo["earth_date"] as? String,
-                let imageSource = photo["img_src"] as? String else {
+                let imageSource = photo["img_src"] as? String,
+                let cameraName = photo["camera"]!["name"] as? String,
+                let cameraFullName = photo["camera"]!["full_name"] as? String
+            
+            else {
                     continue
             }
             
-            
-            
-            
-            //let photo = Photo(id: id, earthDate: earthDate, imageSource: imageSource, imageData: nil)
-            var camera = Camera.init(id: "", name: "", fullName: "")
-            var photoModel = Photo.init(id: id, camera: camera, imageSource: imageSource, earthDate: earthDate, rover: Rovers.Curiosity)
+            let camera = Camera.init(name: cameraName, fullName: cameraFullName)
+            let photoModel = Photo.init(id: id, camera: camera, imageSource: imageSource, earthDate: earthDate, rover: Rovers.Curiosity)
             
             print(photo as Any)
             photos.append(photoModel)

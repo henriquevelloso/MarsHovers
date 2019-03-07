@@ -16,6 +16,7 @@ import Kingfisher
 protocol ListPhotoDisplayLogic: class
 {
     func displayInitialData(viewModel: ListPhoto.Load.ViewModel)
+    func displayPhotoDetail(viewModel: ListPhoto.Detail.ViewModel)
 }
 
 class ListPhotoViewController: UIViewController
@@ -133,13 +134,11 @@ class ListPhotoViewController: UIViewController
                 dateString = self.photos.first!.earthDate
             }
             
-
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
             let date = formatter.date(from: dateString)!
             let dateEnding = Calendar.current.date(byAdding: .day, value: -1, to: date as Date)!
             let dateStr = formatter.string(from: dateEnding)
-            print(dateStr)
             
             let request = ListPhoto.Load.Request(rover: self.selectedRover.rawValue.lowercased(), earthDate: dateStr)
             self.interactor?.doLoadInitialData(request: request)
@@ -181,6 +180,8 @@ class ListPhotoViewController: UIViewController
 
 //MARK: - ListPhotoDisplayLogic 
 extension ListPhotoViewController: ListPhotoDisplayLogic {
+
+    
     
     func displayInitialData(viewModel: ListPhoto.Load.ViewModel)
     {
@@ -204,6 +205,12 @@ extension ListPhotoViewController: ListPhotoDisplayLogic {
             })
             
         }
+    }
+    
+    func displayPhotoDetail(viewModel: ListPhoto.Detail.ViewModel) {
+
+        router?.routeToPhotoDetail(segue: nil)
+        
     }
 }
 
@@ -244,6 +251,13 @@ extension ListPhotoViewController: UICollectionViewDataSource {
         
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let photo = photos[indexPath.row]
+        let request = ListPhoto.Detail.Request(photo: photo)
+        interactor?.doLoadPhotoDetail(request: request)
     }
     
     

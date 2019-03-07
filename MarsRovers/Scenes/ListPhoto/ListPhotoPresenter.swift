@@ -14,19 +14,27 @@ import UIKit
 
 protocol ListPhotoPresentationLogic
 {
-  func presentInitialData(response: ListPhoto.Load.Response)
+    func presentInitialData(response: ListPhoto.Load.Response)
+    func presentPhotoDetail(response: ListPhoto.Detail.Response)
 }
 
 class ListPhotoPresenter: ListPhotoPresentationLogic
 {
-  weak var viewController: ListPhotoDisplayLogic?
-  
-  // MARK: Do something
-  
-  func presentInitialData(response: ListPhoto.Load.Response)
-  {
-    let viewModel = ListPhoto.Load.ViewModel(photos: response.photos)
-    viewController?.displayInitialData(viewModel: viewModel)
+
     
-  }
+    weak var viewController: ListPhotoDisplayLogic?
+    
+    // MARK: Do something
+    
+    func presentInitialData(response: ListPhoto.Load.Response)
+    {
+        let viewModel = ListPhoto.Load.ViewModel(photos: response.photos)
+        viewController?.displayInitialData(viewModel: viewModel)
+        
+    }
+    
+    func presentPhotoDetail(response: ListPhoto.Detail.Response) {
+        let viewModel = ListPhoto.Detail.ViewModel()
+        viewController?.displayPhotoDetail(viewModel: viewModel)
+    }
 }

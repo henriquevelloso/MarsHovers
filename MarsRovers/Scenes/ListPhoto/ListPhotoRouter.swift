@@ -14,7 +14,7 @@ import UIKit
 
 @objc protocol ListPhotoRoutingLogic
 {
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+  func routeToPhotoDetail(segue: UIStoryboardSegue?)
 }
 
 protocol ListPhotoDataPassing
@@ -24,37 +24,39 @@ protocol ListPhotoDataPassing
 
 class ListPhotoRouter: NSObject, ListPhotoRoutingLogic, ListPhotoDataPassing
 {
+
+    
   weak var viewController: ListPhotoViewController?
   var dataStore: ListPhotoDataStore?
   
   // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
+  func routeToPhotoDetail(segue: UIStoryboardSegue?)
+  {
+    if let segue = segue {
+      let destinationVC = segue.destination as! ShowPhotoViewController
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+    } else {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let destinationVC = storyboard.instantiateViewController(withIdentifier: "ShowPhotoViewController") as! ShowPhotoViewController
+      var destinationDS = destinationVC.router!.dataStore!
+      passDataToSomewhere(source: dataStore!, destination: &destinationDS)
+      navigateToSomewhere(source: viewController!, destination: destinationVC)
+    }
+  }
 
   // MARK: Navigation
   
-  //func navigateToSomewhere(source: ListPhotoViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
+  func navigateToSomewhere(source: ListPhotoViewController, destination: ShowPhotoViewController)
+  {
+    source.show(destination, sender: nil)
+  }
   
   // MARK: Passing data
   
-  //func passDataToSomewhere(source: ListPhotoDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+  func passDataToSomewhere(source: ListPhotoDataStore, destination: inout ShowPhotoDataStore)
+  {
+    destination.photo = source.photo
+  }
 }

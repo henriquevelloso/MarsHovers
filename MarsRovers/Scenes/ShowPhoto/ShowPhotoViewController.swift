@@ -11,79 +11,169 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol ShowPhotoDisplayLogic: class
 {
-  func displaySomething(viewModel: ShowPhoto.Something.ViewModel)
+    func displaySomething(viewModel: ShowPhoto.Something.ViewModel)
 }
 
 class ShowPhotoViewController: UIViewController, ShowPhotoDisplayLogic
 {
-  var interactor: ShowPhotoBusinessLogic?
-  var router: (NSObjectProtocol & ShowPhotoRoutingLogic & ShowPhotoDataPassing)?
-
-  // MARK: Object lifecycle
-  
-  override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-  {
-    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    setup()
-  }
-  
-  required init?(coder aDecoder: NSCoder)
-  {
-    super.init(coder: aDecoder)
-    setup()
-  }
-  
-  // MARK: Setup
-  
-  private func setup()
-  {
-    let viewController = self
-    let interactor = ShowPhotoInteractor()
-    let presenter = ShowPhotoPresenter()
-    let router = ShowPhotoRouter()
-    viewController.interactor = interactor
-    viewController.router = router
-    interactor.presenter = presenter
-    presenter.viewController = viewController
-    router.viewController = viewController
-    router.dataStore = interactor
-  }
-  
-  // MARK: Routing
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-  {
-    if let scene = segue.identifier {
-      let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-      if let router = router, router.responds(to: selector) {
-        router.perform(selector, with: segue)
-      }
+    //MARK: Outlets
+    @IBOutlet weak var photoImage: UIImageView!
+    @IBOutlet weak var cameraFullNameLabel: UILabel!
+    @IBOutlet weak var cameraNameLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    
+    //MARK: Properties
+    var interactor: ShowPhotoBusinessLogic?
+    var router: (NSObjectProtocol & ShowPhotoRoutingLogic & ShowPhotoDataPassing)?
+    
+    // MARK: Object lifecycle
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
+    {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
     }
-  }
-  
-  // MARK: View lifecycle
-  
-  override func viewDidLoad()
-  {
-    super.viewDidLoad()
-    doSomething()
-  }
-  
-  // MARK: Do something
-  
-  //@IBOutlet weak var nameTextField: UITextField!
-  
-  func doSomething()
-  {
-    let request = ShowPhoto.Something.Request()
-    interactor?.doSomething(request: request)
-  }
-  
-  func displaySomething(viewModel: ShowPhoto.Something.ViewModel)
-  {
-    //nameTextField.text = viewModel.name
-  }
+    
+    required init?(coder aDecoder: NSCoder)
+    {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    // MARK: Setup
+    
+    private func setup()
+    {
+        let viewController = self
+        let interactor = ShowPhotoInteractor()
+        let presenter = ShowPhotoPresenter()
+        let router = ShowPhotoRouter()
+        viewController.interactor = interactor
+        viewController.router = router
+        interactor.presenter = presenter
+        presenter.viewController = viewController
+        router.viewController = viewController
+        router.dataStore = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
+    }
+    
+    // MARK: View lifecycle
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        doSomething()
+        designSetup()
+        addExportButton()
+    }
+    
+    // MARK: Do something
+    
+    //@IBOutlet weak var nameTextField: UITextField!
+    
+    func designSetup() {
+        
+        if let photo = self.router?.dataStore?.photo {
+            
+            self.navigationItem.title = "\(photo.rover.rawValue) on \(photo.earthDate)"
+            self.cameraNameLabel.text = photo.camera.name
+            self.cameraFullNameLabel.text = photo.camera.fullName
+            
+            let url = URL(string: photo.imageSource)
+            photoImage.kf.indicatorType = .activity
+            photoImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "mars"),
+                options: [
+                    .scaleFactor(UIScreen.main.scale),
+                    .transition(.fade(1)),
+                    .cacheOriginalImage
+                ])
+            {
+                result in
+                switch result {
+                case .success(let value):
+                    print("Task done for: \(value.source.url?.absoluteString ?? "")")
+                case .failure(let error):
+                    print("Job failed: \(error.localizedDescription)")
+                }
+            }
+        }
+        
+        self.scrollView.minimumZoomScale = 1
+        self.scrollView.maximumZoomScale = 10.0
+        
+        
+        let nameAction = UITapGestureRecognizer(target: self, action:#selector(nameTapped(_:)))
+        let fullNameAction = UITapGestureRecognizer(target: self, action:#selector(fullNameTapped(_:)))
+        
+        cameraNameLabel?.addGestureRecognizer(nameAction)
+        cameraFullNameLabel?.addGestureRecognizer(fullNameAction)
+        cameraFullNameLabel.isHidden = true
+    }
+    
+    func addExportButton() {
+        let button = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(exportImage))
+        navigationItem.rightBarButtonItem = button
+        
+    }
+    
+    func doSomething()
+    {
+        let request = ShowPhoto.Something.Request()
+        interactor?.doSomething(request: request)
+    }
+    
+    func displaySomething(viewModel: ShowPhoto.Something.ViewModel)
+    {
+        //nameTextField.text = viewModel.name
+    }
+    
+    @objc func exportImage() {
+         if let photo = self.router?.dataStore?.photo {
+            let safariVC = SFSafariViewController(url: NSURL(string: photo.imageSource)! as URL)
+            self.present(safariVC, animated: true, completion: nil)
+            safariVC.delegate = self
+        }
+    }
+    
+    @objc func nameTapped(_ sender: UITapGestureRecognizer) {
+        self.cameraNameLabel.isHidden = true
+        self.cameraFullNameLabel.isHidden = false
+    }
+    
+    @objc func fullNameTapped(_ sender: UITapGestureRecognizer) {
+        self.cameraNameLabel.isHidden = false
+        self.cameraFullNameLabel.isHidden = true
+    }
+    
+}
+
+
+extension ShowPhotoViewController: UIScrollViewDelegate {
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return self.photoImage
+    }
+    
+}
+
+extension ShowPhotoViewController: SFSafariViewControllerDelegate {
+    
 }

@@ -9,7 +9,6 @@
 import Foundation
 
 struct Camera: Codable {
-    var id: String
     var name: String
     var fullName: String
 }

@@ -152,11 +152,11 @@
 		C503B88E22303C6F00801B91 /* ShowPhoto */ = {
 			isa = PBXGroup;
 			children = (
+				C5161E7222303D5600EBDF4D /* ShowPhotoViewController.swift */,
 				C5161E6E22303D5500EBDF4D /* ShowPhotoPresenter.swift */,
 				C5161E6F22303D5500EBDF4D /* ShowPhotoWorker.swift */,
 				C5161E7022303D5500EBDF4D /* ShowPhotoRouter.swift */,
 				C5161E7122303D5500EBDF4D /* ShowPhotoModels.swift */,
-				C5161E7222303D5600EBDF4D /* ShowPhotoViewController.swift */,
 				C5161E7322303D5600EBDF4D /* ShowPhotoInteractor.swift */,
 			);
 			path = ShowPhoto;
@@ -295,14 +295,12 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MarsRovers/Pods-MarsRovers-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

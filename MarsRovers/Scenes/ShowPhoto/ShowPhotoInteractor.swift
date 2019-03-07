@@ -19,14 +19,14 @@ protocol ShowPhotoBusinessLogic
 
 protocol ShowPhotoDataStore
 {
-  //var name: String { get set }
+  var photo: Photo? { get set }
 }
 
 class ShowPhotoInteractor: ShowPhotoBusinessLogic, ShowPhotoDataStore
 {
   var presenter: ShowPhotoPresentationLogic?
   var worker: ShowPhotoWorker?
-  //var name: String = ""
+  var photo: Photo?
   
   // MARK: Do something
   

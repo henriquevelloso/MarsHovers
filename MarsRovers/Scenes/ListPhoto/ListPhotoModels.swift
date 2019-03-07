@@ -14,22 +14,35 @@ import UIKit
 
 enum ListPhoto
 {
-  // MARK: Use cases
-  
-  enum Load
-  {
-    struct Request
+    // MARK: Use cases
+    
+    enum Load
     {
-        var rover: String
-        var earthDate: String
+        struct Request
+        {
+            var rover: String
+            var earthDate: String
+        }
+        struct Response
+        {
+            var photos: [Photo]
+        }
+        struct ViewModel
+        {
+            var photos: [Photo]
+        }
     }
-    struct Response
-    {
-        var photos: [Photo]
+    
+    enum Detail {
+        struct Request
+        {
+            let photo: Photo
+        }
+        struct Response
+        {
+        }
+        struct ViewModel
+        {
+        }
     }
-    struct ViewModel
-    {
-        var photos: [Photo]
-    }
-  }
 }
